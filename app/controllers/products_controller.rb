@@ -1,3 +1,4 @@
+# products controller
 class ProductsController < ApplicationController
   def index
     products = Product.all
@@ -23,15 +24,12 @@ class ProductsController < ApplicationController
 
   def destroy
     product = Product.find_by(id: params[:id])
-    if product.destroy
-      render json: {id: product.id}
-    end
+    render json: { id: product.id } if product.destroy
   end
-
 
   private
 
   def product_params
-    params.require(:product).permit(:name,:description,:img_url, :price)
+    params.require(:product).permit(:name, :description, :img_url, :price)
   end
 end
